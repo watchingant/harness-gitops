@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: harness
+  name: harness
+  namespace: harness-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harness
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: harness
+    spec:
+      containers:
+      - image: harness/harness
+        name: harness-os
+        resources: {}
+      #imagePullPolicy: IfNotPresent
+   #   livenessProbe:
+   #     failureThreshold: 3
+   #     port: 3000
+   #     scheme: TCP
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        - containerPort: 3022
+          name: httpssh
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: harness-data
+      volumes: 
+      - emptyDir: {}
+        name: harness-data
+
+       
