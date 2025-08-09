@@ -1,0 +1,29 @@
+kind: pipeline
+spec:
+  stages:
+  - type: ci
+    spec:
+      steps:
+      - name: test 2
+        type: run
+        spec:
+          container: python:2
+          script: |-
+            pip install -r requirements.txt
+            pytest
+
+      - name: test 3.3
+        type: run
+        spec:
+          container: python:3.3
+          script: |-
+            pip install -r requirements.txt
+            pytest
+
+      - name: test 3.4
+        type: run
+        spec:
+          container: python:3.4
+          script: |-
+            pip install -r requirements.txt
+            pytest
